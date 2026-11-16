@@ -53,17 +53,23 @@ function getStatusEColor(velocidade) {
   };
 }
 
-// Coordenadas do trecho da Marginal Tietê (Entre a Ponte de Pirituba / Ponte Julio de Mesquita Neto e a Ponte das Banderas / Sambódromo)
-// Trecho contínuo identificável na Marginal Tietê (São Paulo - SP)
+// Coordenadas do trecho da Marginal Tietê ao sul do Rio Tietê.
+// Os pontos acompanham a curvatura da pista no sentido oeste -> leste.
 const TRECHO_MARGINAL_TIETE = [
-  [-23.5132, -46.6895], // Próximo à Ponte Julio de Mesquita Neto
-  [-23.5148, -46.6780], // Trecho Central
-  [-23.5159, -46.6660], // Próximo ao Anhembi / Sambódromo
-  [-23.5155, -46.6540], // Próximo à Ponte das Bandeiras
+  [-23.51525, -46.6735],
+  [-23.51545, -46.6715],
+  [-23.51565, -46.6695],
+  [-23.51585, -46.6675],
+  [-23.51610, -46.6655],
+  [-23.51645, -46.6635],
+  [-23.51680, -46.6615],
+  [-23.51715, -46.6595],
+  [-23.51745, -46.6575],
+  [-23.51770, -46.6555],
 ];
 
 // Centro do mapa em São Paulo (focado na Marginal Tietê)
-const CENTER_SP = [-23.5148, -46.6718];
+const CENTER_SP = [-23.5161, -46.6655];
 
 const MapaTransito = ({ velocidadeMedia, erro, carregando }) => {
   const statusInfo = getStatusEColor(velocidadeMedia);
@@ -138,12 +144,24 @@ const MapaTransito = ({ velocidadeMedia, erro, carregando }) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {/* Linha destacada do trecho único da Marginal Tietê */}
+            {/* Camada 1: Halo suave (cor desaturada, baixa opacidade, espessura maior) */}
             <Polyline
               positions={TRECHO_MARGINAL_TIETE}
               pathOptions={{
                 color: statusInfo.cor,
-                weight: 8,
-                opacity: 0.9,
+                weight: 12,
+                opacity: 0.18,
+                lineCap: 'round',
+                lineJoin: 'round'
+              }}
+            />
+            {/* Camada 2: Destaque principal (cor original, opacidade normal, espessura menor) */}
+            <Polyline
+              positions={TRECHO_MARGINAL_TIETE}
+              pathOptions={{
+                color: statusInfo.cor,
+                weight: 5,
+                opacity: 0.85,
                 lineCap: 'round',
                 lineJoin: 'round'
               }}
@@ -157,8 +175,8 @@ const MapaTransito = ({ velocidadeMedia, erro, carregando }) => {
               </Popup>
             </Polyline>
 
-            {/* Marcador do Sensor no trecho */}
-            <Marker position={[-23.5148, -46.6780]}>
+            {/* Marcador do Sensor no trecho - localizado no trecho central da Marginal Tietê */}
+            <Marker position={[-23.5161, -46.6655]}>
               <Popup>
                 <div className="text-black text-sm font-sans p-1">
                   <strong>Estação de Medição FIWARE</strong><br />
