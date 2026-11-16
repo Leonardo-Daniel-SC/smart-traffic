@@ -2,6 +2,9 @@
 
 Aplicação web para acompanhar dados de trânsito recebidos pelo FIWARE. O painel consulta uma entidade do Orion Context Broker, calcula a velocidade média em intervalos de 30 segundos e representa o resultado em um trecho da Marginal Tietê, em São Paulo.
 
+
+**Acesse a página:** [SMART TRAFFIC](https://smart-traffic-blush-xi.vercel.app/)
+
 ## O que a aplicação mostra
 
 - Mapa interativo centrado em um trecho da Marginal Tietê, entre a região do Anhembi e a Ponte das Bandeiras.
@@ -111,3 +114,7 @@ O mapa é exibido com Leaflet e React Leaflet, usando os tiles do OpenStreetMap.
 - A média é calculada no navegador a partir das atualizações observadas durante cada intervalo de 30 segundos; se nenhuma medição válida chegar no intervalo, não há uma nova média para esse período.
 - O mapa identifica visualmente um trecho para demonstração. A associação entre o sensor e a via é uma representação da interface, conforme o aviso exibido na página.
 - A camada de mapa do OpenStreetMap requer conexão com a internet.
+
+
+
+
