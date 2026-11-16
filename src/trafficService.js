@@ -1,39 +1,21 @@
-
-const API_URL = "http://184.195.90.61:1026";
+const TRAFFIC_ENDPOINT = "/api/traffic";
 
 export async function buscarUltimoEvento() {
-  console.log("1 - Função buscarUltimoEvento executada");
+  const resposta = await fetch(TRAFFIC_ENDPOINT, {
+    method: "GET",
+    headers: { accept: "application/json" },
+    cache: "no-store",
+  });
 
-  try {
-    console.log("2 - Tentando consultar o Orion...");
+  const dados = await resposta.json().catch(() => null);
 
-    const resposta = await fetch(
-      `${API_URL}/v2/entities/urn:ngsi-ld:Traffic:003?options=keyValues`,
-      {
-        method: "GET",
-        headers: {
-          "fiware-service": "smart",
-          "fiware-servicepath": "/"
-        },
-        cache: "no-store"
-      }
-    );
-
-    console.log("3 - Resposta recebida:", resposta.status);
-
-    if (!resposta.ok) {
-      const mensagem = await resposta.text();
-      throw new Error(`HTTP ${resposta.status}: ${mensagem}`);
-    }
-
-    const dados = await resposta.json();
-
-    console.log("4 - JSON recebido:", dados);
-
-    return dados;
-
-  } catch (erro) {
-    console.error("Erro detalhado no FIWARE:", erro);
-    throw erro;
+  if (!resposta.ok) {
+    throw new Error(dados?.erro || `Falha ao consultar o FIWARE (HTTP ${resposta.status}).`);
   }
+
+  if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
+    throw new Error("O FIWARE retornou uma resposta inválida.");
+  }
+
+  return dados;
 }

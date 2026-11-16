@@ -55,7 +55,7 @@ function App() {
         }
 
       } catch (error) {
-        setErro("Não foi possível consultar o FIWARE.");
+        setErro(error.message || "Não foi possível consultar o FIWARE.");
         console.error("Erro ao atualizar dados:", error);
 
       } finally {
