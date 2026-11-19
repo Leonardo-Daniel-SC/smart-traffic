@@ -5,6 +5,8 @@ Aplicação web para acompanhar dados de trânsito recebidos pelo FIWARE. O pain
 
 **Acesse a página:** [SMART TRAFFIC](https://smart-traffic-blush-xi.vercel.app/)
 
+**Acesse a Wokwi:** [PROTÓTIPO WOKWI](https://wokwi.com/projects/480448466731941889)
+
 ## O que a aplicação mostra
 
 - Mapa interativo centrado em um trecho da Marginal Tietê, entre a região do Anhembi e a Ponte das Bandeiras.
